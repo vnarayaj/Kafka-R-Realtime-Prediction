@@ -25,9 +25,11 @@ class StreamProcessorTest : StringSpec() {
             every { mockPredictor.requestWeight(any()) } returns expectedOutput
 
             // Properties Mock
-            properties.setProperty(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
+            properties.setProperty(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "pkc-41p56.asia-south1.gcp.confluent.cloud:9092")
             properties.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, "streamsId")
-
+            properties.setProperty(StreamsConfig.SECURITY_PROTOCOL_CONFIG, "SASL_SSL")
+            properties.setProperty(SaslConfigs.SASL_MECHANISM, "PLAIN")
+            properties.setProperty(SaslConfigs.SASL_JAAS_CONFIG, "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"W3TRVYHC2A26PWCQ\" password=\"NjM0A3zgWSOj/AbAjtPYV2cmUi6iOrFH3xathT6hJFBaj8G7AmQGyQruurfNYI8R\";")
             val mockProperties = mockkClass(StreamProperties::class)
             every { mockProperties.configureProperties() } returns properties
 
